@@ -118,28 +118,32 @@ class FieldOfRationalFunctionsWithWeylAction(sage.rings.fraction_field.FractionF
             j = (-1)**len(rw) * q**(sum(cfs)) * self._x(2*a)
         return j
 
-    def _f0(self):
+    def _f0(self, h):
         """
         Compute the f0 part of the invariant polynomial as defined in (3.20) on page 12.
+        Pass in a different function for the twisted version.
         """
         f0 = self.CF(0)
         for w in self.weyl_group.list():
-            g = self._j(w) * self._act(self.CF.one(),w)
+            g = self._j(w) * self._act(h,w)
             f0 += g
         return f0
 
-    def _invariant_function(self):
+    def _invariant_function(self, h = None):
         """
         Compute the invariant polynomial as defined in (3.21) on page 12.
+        Pass in a different function for the twisted version.
         """
-        function = self._f0()/self._delta()
+        if h is None:
+            h = self.CF.one()
+        function = self._f0(h)/self._delta()
         return function
 
-    def invariant_function(self):
+    def invariant_function(self, h = None):
         """
         Compute the invariant polynomial and convert it to the actual ring.
         """
-        return self(self._invariant_function())
+        return self(self._invariant_function(h))
 
 
     ################################################################

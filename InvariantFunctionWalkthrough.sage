@@ -138,7 +138,7 @@ for w in W.list():
 print
 
 #Create delta function
-f0 = F._f0()
+f0 = F._f0(F.CF.one())
 print "15) Creating f0 function (eq. 3.20 page 12):\n" + str(f0) + "\n"
 
 #Create delta function
